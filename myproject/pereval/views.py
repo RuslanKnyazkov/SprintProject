@@ -1,26 +1,17 @@
-from django.shortcuts import render
-
 from rest_framework import generics
 from .models import PerevalAdded
 from .serializers import PerevalAddedSerializer
+from rest_framework.renderers import BrowsableAPIRenderer, JSONRenderer
+
 
 class PerevalAddedCreateView(generics.CreateAPIView):
     queryset = PerevalAdded.objects.all()
     serializer_class = PerevalAddedSerializer
+    renderer_classes = [BrowsableAPIRenderer, JSONRenderer]
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context
 
 
-from django.http import JsonResponse
-import json
-
-
-def submit_data(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            serializer = PerevalAddedSerializer(data=data)
-            if serializer.is_valid():
-                serializer.save()
-            return JsonResponse({'status': 'success', 'data': data})  # Пример ответа
-        except Exception as e:
-            return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
-    return JsonResponse({'status': 'error', 'message': 'Invalid method'}, status=405)

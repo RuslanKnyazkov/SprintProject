@@ -1,6 +1,5 @@
 from django.urls import path
-from .views import PerevalAddedCreateView, submit_data
-
+from .views import PerevalAddedCreateView
 urlpatterns = [
-    path('submitData/', submit_data, name='submit-data'),
+    path('submitData/', PerevalAddedCreateView.as_view(), name='submit-data'),
 ]

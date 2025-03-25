@@ -12,19 +12,14 @@ class UsersSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class PerevalImagesSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = PerevalImages
         fields = ['id', 'image', 'created_at']
-        extra_kwargs = {
-            'image': {'read_only': True},
-        }
-
 
 class PerevalAddedSerializer(serializers.ModelSerializer):
     user = UsersSerializer()
     coord = CoordsSerializer()
-    images = PerevalImagesSerializer(many=True, read_only=False)
+    images = PerevalImagesSerializer(many=True)
 
     class Meta:
         model = PerevalAdded
