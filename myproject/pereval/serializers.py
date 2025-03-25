@@ -1,5 +1,3 @@
-import base64
-from django.core.files.base import ContentFile
 from rest_framework import serializers
 from .models import PerevalAdded, Coords, Users, PerevalImages
 
@@ -14,24 +12,13 @@ class UsersSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class PerevalImagesSerializer(serializers.ModelSerializer):
-    image_base64 = serializers.CharField(write_only=True, required=False)
 
     class Meta:
         model = PerevalImages
-        fields = ['id', 'image', 'created_at', 'image_base64']
+        fields = ['id', 'image', 'created_at']
         extra_kwargs = {
             'image': {'read_only': True},
         }
-
-    def create(self, validated_data):
-        image_base64 = validated_data.pop('image_base64', None)
-        if image_base64:
-
-            format, imgstr = image_base64.split(';base64,')
-            ext = format.split('/')[-1]
-            image_data = ContentFile(base64.b64decode(imgstr), name=f'image.{ext}')
-            validated_data['image'] = image_data.read()
-        return super().create(validated_data)
 
 
 class PerevalAddedSerializer(serializers.ModelSerializer):
