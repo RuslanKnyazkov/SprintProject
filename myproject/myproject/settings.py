@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'pereval',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +60,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
-print(config('FSTR_DB_NAME'),config('FSTR_DB_LOGIN'),config('FSTR_DB_PASS'),config('FSTR_DB_HOST'),config('FSTR_DB_PORT'))
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 

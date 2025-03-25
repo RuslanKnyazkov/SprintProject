@@ -3,9 +3,6 @@ from django.db import models
 
 
 class Users(models.Model):
-    user = models.OneToOneField(to=User, max_length=255,
-                                verbose_name='Пользователь',
-                                on_delete=models.CASCADE)
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=100, verbose_name='Имя')
     last_name = models.CharField(max_length=100, verbose_name='Фамилия')
