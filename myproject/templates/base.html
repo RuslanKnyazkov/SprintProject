@@ -148,7 +148,7 @@
             const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
             try {
-                const response = await fetch('/submitData/', {
+                const response = await fetch('/api/submitData/', {
                     method: 'POST',
                     headers: {
                         'X-CSRFToken': csrfToken
