@@ -43,8 +43,8 @@ class PerevalAdded(models.Model):
 
 class PerevalImages(models.Model):
     pereval = models.ForeignKey(PerevalAdded, on_delete=models.CASCADE)
-    image = models.BinaryField()  # Для хранения бинарных данных изображения
+    image = models.ImageField(upload_to='pereval_images/')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Image for {self.pereval.title}"
+        return f"Image {self.id} for {self.pereval.title}"
