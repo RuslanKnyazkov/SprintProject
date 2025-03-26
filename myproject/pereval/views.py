@@ -3,16 +3,17 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Pereval
 from .serializers import PerevalSerializer
-
+from rest_framework.parsers import MultiPartParser, JSONParser
 
 class PerevalViewSet(viewsets.ModelViewSet):
     queryset = Pereval.objects.all()
     serializer_class = PerevalSerializer
-    http_method_names = ['post']  # Разрешаем только POST запросы
-
+    http_method_names = ['post']
+    parser_classes = [MultiPartParser, JSONParser]
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+
 
         try:
             self.perform_create(serializer)
