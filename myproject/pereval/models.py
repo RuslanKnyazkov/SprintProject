@@ -1,7 +1,7 @@
 from django.db import models
 
 class User(models.Model):
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=False)
     fam = models.CharField(max_length=150)
     name = models.CharField(max_length=150)
     otc = models.CharField(max_length=150, blank=True)
