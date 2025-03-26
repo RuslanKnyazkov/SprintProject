@@ -29,12 +29,6 @@ document.getElementById('perevalForm').addEventListener('submit', async (e) => {
         formData.append('images.title', document.getElementById('title1').value || "Изображение 1");
     }
 
-    const image2 = document.getElementById('image2').files[0];
-    if (image2) {
-        formData.append('images.image', image2);
-        formData.append('images.title', document.getElementById('title2').value || "Изображение 2");
-    }
-
     try {
         const response = await fetch('http://127.0.0.1:8000/api/submitData/', {
             method: 'POST',
