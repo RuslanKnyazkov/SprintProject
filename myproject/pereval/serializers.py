@@ -24,7 +24,7 @@ class PerevalImageSerializer(serializers.ModelSerializer):
 class PerevalSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     coords = CoordsSerializer()
-    images = PerevalImageSerializer(many=True, required=False)
+    images = PerevalImageSerializer(many=True, required=False, read_only=True)
 
     class Meta:
         model = Pereval
