@@ -64,3 +64,13 @@ class PerevalSerializer(serializers.ModelSerializer):
                         title=title
                     )
         return pereval
+
+    def update(self, instance, validated_data):
+        user = validated_data.pop('user')
+        coord = validated_data.pop('coords')
+        instance = super().update(instance=instance, validated_data=validated_data)
+
+        if coord:
+            Coords.objects.filter(id = instance.pk).update(**coord)
+
+        return instance

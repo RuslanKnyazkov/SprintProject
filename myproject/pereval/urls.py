@@ -10,4 +10,3 @@ router.register(r'submitData', PerevalViewSet, basename='pereval')
 urlpatterns = [
     path('', include(router.urls)),
 ]
-print(router.urls)
